@@ -9,23 +9,24 @@ namespace PermMissingElem
 	public class Solution
 	{
 		public int solution(int[] A) {
-			int[] array = new int[A.Length+1];
-			int maxValue = A.Max();
-			int minValue = A.Min();
+			var values = A.OrderBy(x => x).ToList();
+			var result = 0;
 
-			for (int i = 0; i < array.Length; i++)  {
-				if (i == 0) {
-					array[i] = minValue;
-				} else if(i == array.Length-1) {
-					array[i] = maxValue;
-				} else {
-					array[i] = array[i - 1] + 1;
+			result = values.Count == 0 ? 1 : values.Count == 1 ? values[0] == 1 ? 2 : 1 : values.Count > 1 ? values[0] == 2 ? 1 : 0 : 0;
+
+			if (result == 0) {
+				for (int i=0; i< values.Count - 1; i++) {
+					if (values[i + 1] != values[i] + 1) {
+						result = values[i] + 1;
+						break;
+					} else if (values[i + 1] == values[values.Count - 1]) {
+						result = values[i + 1] + 1;
+						break;
+					}
 				}
 			}
 
-			List<int> lstValue = (from s in array where !A.Contains(s) select s).ToList<int>();
-
-			return lstValue[0];
+			return result;
 		}
 	}
 }

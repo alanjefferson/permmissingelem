@@ -23,7 +23,7 @@ namespace PermMissingElemTests
 		[Test]
 		public void PermMissingElem_Test2()
 		{
-			int result = _solution.solution(new int[] { 6, 2, 4, 5 });
+			int result = _solution.solution(new int[] { 1, 6, 2, 4, 5 });
 			Assert.AreEqual(3, result);
 		}
 	}
